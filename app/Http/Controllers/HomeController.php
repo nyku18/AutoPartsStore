@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product as Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -23,6 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $this->middleware('auth');
+
+        $products = Product::all();
+        return view('home', compact('products'));
+    }
+
+    public function welcome()
+    {
+        $products = Product::all();
+        return view('welcome', compact('products'));
     }
 }

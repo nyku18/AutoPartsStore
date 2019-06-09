@@ -12,8 +12,7 @@
 
     @if($brands)
       <label class="label" for="brand">Brand</label>
-      <select name="brand_id" required>
-        <option></option>
+      <select class="input" name="brand_id" required>
         @foreach($brands as $brand)
             <option value="{{ $brand->id }}" {{ ($brand->id == $product->model->brand->id) ? "selected" : "" }}>{{ $brand->name }}</option>
         @endforeach
@@ -22,10 +21,18 @@
 
     @if($models)
       <label class="label" for="model">Model</label>
-      <select name="model_id" required>
-        <option></option>
+      <select class="input" name="model_id" required>
         @foreach($models as $model)
             <option value="{{ $model->id }}" {{ ($model->id == $product->model->id) ? "selected" : "" }}>{{ $model->name }}</option>
+        @endforeach
+      </select>
+    @endif
+
+    @if($categories)
+      <label class="label" for="categorie">Category</label>
+      <select class="input" name="category_id" required>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" {{ ($category->id == $product->category->id) ? "selected" : "" }}>{{ $category->title }}</option>
         @endforeach
       </select>
     @endif
@@ -84,5 +91,16 @@
     </div>
 
     @include ('errors')
+  </form>
+
+  <form method="POST" action="/products/{{ $product->id }}">
+    @method('DELETE')
+    @csrf
+
+    <div class="field">
+      <div class="control">
+        <button type="submit" class="button is-link">Delete product</button>
+      </div>
+    </div>
   </form>
 @endsection

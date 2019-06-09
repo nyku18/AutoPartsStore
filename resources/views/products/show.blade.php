@@ -29,6 +29,14 @@
 </div>
 
 <div class="field">
+  <label class="label" for="category">Category</label>
+
+  <div class="control">
+    <p class="input">{{ $product->category->title }}</p>
+  </div>
+</div>
+
+<div class="field">
   <label class="label" for="title">Title</label>
 
   <div class="control">
@@ -72,23 +80,23 @@
   </div>
 </div>
 
-<div class="field">
-  <div class="control">
-    <a href="/products/{{ $product->id }}/edit" class="button is-link">
-      Update product
-    </a>
-  </div>
-</div>
-
-<form method="POST" action="/products/{{ $product->id }}">
-  @method('DELETE')
-  @csrf
-
+@if(Auth::user()->id == $product->user_id)
   <div class="field">
     <div class="control">
-      <button type="submit" class="button is-link">Delete product</button>
+      <a href="/products/{{ $product->id }}/edit" class="button is-link">
+        Settings
+      </a>
     </div>
   </div>
-</form>
+
+@else
+  <div class="field">
+    <div class="control">
+      <a href="/cart" class="button is-link">
+        Add to cart
+      </a>
+    </div>
+  </div>
+@endif
 
 @endsection

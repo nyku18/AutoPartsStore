@@ -11,6 +11,8 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('car_brands')->truncate();
+
       DB::table('car_brands')->insert([
           'name' => "Audi"
       ]);

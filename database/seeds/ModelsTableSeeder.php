@@ -11,6 +11,8 @@ class ModelsTableSeeder extends Seeder
      */
     public function run()
     {
+      DB::table('car_models')->truncate();
+
       DB::table('car_models')->insert([
           'brand_id' => 1,
           'name' => "A4"

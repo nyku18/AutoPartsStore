@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Product as Product;
 use App\CarBrand as CarBrand;
 use App\CarModel as CarModel;
+use App\Category as Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -16,7 +18,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-      $products = Product::all();
+      $products = Auth::user()->products;
 
       return view('products.index', compact('products'));
     }
@@ -25,18 +27,21 @@ class ProductsController extends Controller
     {
       $brands = CarBrand::all();
       $models = CarModel::all();
-      return view('products.create', compact('brands', 'models'));
+      $categories = Category::all();
+      return view('products.create', compact('brands', 'models', 'categories'));
     }
 
     public function store(Request $request)
     {
+      // print_r($request->file('photo'));
+      // print_r($request->all());
+      // die();
       // $version = new CarVersion;
       // $version->description = $request->version;
       // $version->id_model = $request->id_model;
       // $version->save();
       // $request['id_version'] = $version->id;
       $request['original'] = $request->original ? 1 : 0;
-      $request['category_id'] = 0;
 
       Product::create(request()->validate([
         'user_id' => ['required'],
@@ -57,16 +62,18 @@ class ProductsController extends Controller
     {
       $brands = CarBrand::all();
       $models = CarModel::all();
+      $categories = Category::all();
 
-      return view('products.show', compact('product', 'brands', 'models'));
+      return view('products.show', compact('product', 'brands', 'models', 'categories'));
     }
 
     public function edit(Product $product)
     {
       $brands = CarBrand::all();
       $models = CarModel::all();
+      $categories = Category::all();
 
-      return view('products.edit', compact('product', 'brands', 'models'));
+      return view('products.edit', compact('product', 'brands', 'models', 'categories'));
     }
 
     public function update(Product $product)

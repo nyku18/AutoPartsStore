@@ -19,15 +19,21 @@
 
             <div class="content">
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+              <h1 class="title">Products</h1>
+
+              <ul>
+                @foreach ($products as $product)
+                  <li>
+                    <a href="/products/{{ $product->id }}">
+                      {{ $product->title}}
+                    </a>
+
+                    <a href="/cart" class="button is-link">
+                      Add to cart
+                    </a>
+                  </li>
+                @endforeach
+              </ul>
             </div>
         </div>
 @endsection
