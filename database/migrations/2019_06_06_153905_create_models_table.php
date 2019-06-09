@@ -13,11 +13,10 @@ class CreateModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('models', function (Blueprint $table) {
+        Schema::create('car_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_brand');
+            $table->bigInteger('brand_id');
             $table->string('name');
-            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('models');
+        Schema::dropIfExists('car_models');
     }
 }
