@@ -4,7 +4,7 @@
 
   <h1 class="title">Add a new product</h1>
 
-  <form method="POST" action="/products">
+  <form method="POST" action="/products" enctype="multipart/form-data">
     @csrf
 
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -82,7 +82,7 @@
       <label class="label" for="photo">Photo</label>
 
       <div class="control">
-        <input type="file" class="input" name="photo" required>
+        <input type="file" class="input" name="product_photo" required>
       </div>
     </div>
 

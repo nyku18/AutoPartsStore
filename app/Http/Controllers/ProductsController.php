@@ -8,6 +8,8 @@ use App\CarModel as CarModel;
 use App\Category as Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
@@ -33,27 +35,39 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-      // print_r($request->file('photo'));
-      // print_r($request->all());
-      // die();
-      // $version = new CarVersion;
-      // $version->description = $request->version;
-      // $version->id_model = $request->id_model;
-      // $version->save();
-      // $request['id_version'] = $version->id;
-      $request['original'] = $request->original ? 1 : 0;
+       if ( $request->file('product_photo') ) {
+            $file = $request->file('product_photo');
+            $image_extension = $file->getClientOriginalExtension();
+            $image_name = 'placeholder.jpg';
 
-      Product::create(request()->validate([
-        'user_id' => ['required'],
-        'model_id' => ['required'],
-        'category_id' => ['required'],
-        'original' => ['required'],
-        'title' => ['required', 'min:3'],
-        'description' => ['required', 'min:3'],
-        'stock' => ['required', 'min:0'],
-        'price' => ['required', 'min:0'],
-        'photo' => ['required']
-      ]));
+            $request['photo'] = $image_name;
+            $request['original'] = $request->original ? 1 : 0;
+
+            $product = Product::create(request()->validate([
+              'user_id' => ['required'],
+              'model_id' => ['required'],
+              'category_id' => ['required'],
+              'original' => ['required'],
+              'title' => ['required', 'min:3'],
+              'description' => ['required', 'min:3'],
+              'stock' => ['required', 'min:0'],
+              'price' => ['required', 'min:0'],
+              'photo' => ['required']
+            ]));
+
+            $image_name = $product->id . '.' . $image_extension;
+            $path = public_path( 'uploads/products/' );
+            File::makeDirectory( $path, 0775, true, true );
+
+            $image = Image::make( $request->file('product_photo'));
+
+            $image->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save( $path .'/'.$image_name );
+
+            $product['photo'] = $image_name;
+            $product->save();
+          }
 
       return redirect('/products');
     }
@@ -76,10 +90,27 @@ class ProductsController extends Controller
       return view('products.edit', compact('product', 'brands', 'models', 'categories'));
     }
 
-    public function update(Product $product)
+    public function update(Product $product, Request $request)
     {
-      $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));
+      if ( $request->file('product_photo') ) {
+           $file = $request->file('product_photo');
+           $image_extension = $file->getClientOriginalExtension();
+           $image_name = $product->id . '.' . $image_extension;
 
+           $path = public_path( 'uploads/products/' );
+           File::makeDirectory( $path, 0775, true, true );
+
+           $image = Image::make( $request->file('product_photo'));
+
+           $image->resize(300, null, function ($constraint) {
+               $constraint->aspectRatio();
+           })->save( $path .'/'.$image_name );
+           
+           $request['original'] = $request->original ? 1 : 0;
+           $request['photo'] = $image_name;
+           $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));
+
+      }
       return redirect('/products');
     }
 

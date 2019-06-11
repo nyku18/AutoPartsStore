@@ -74,7 +74,6 @@
 
 <div class="field">
   <label class="label" for="photo">Photo</label>
-
   <div class="control">
     <p class="input">{{ $product->photo }}</p>
   </div>

@@ -4,7 +4,7 @@
 
   <h1 class="title">Edit product</h1>
 
-  <form method="POST" action="/products/{{ $product->id }}">
+  <form method="POST" action="/products/{{ $product->id }}" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
 
@@ -71,7 +71,7 @@
 
     <div class="field">
       <label class="checkbox" for="original">
-            <input type="checkbox" name="original" value="{{ $product->original }}">
+            <input type="checkbox" name="original" value="1" {{ ($product->original == 1) ? "checked" : "" }}>
               Original
           </label>
     </div>
@@ -80,7 +80,7 @@
       <label class="label" for="photo">Photo</label>
 
       <div class="control">
-        <input type="file" class="input" name="photo" value="{{ $product->photo }}" required>
+        <input type="file" class="input" name="product_photo" value="{{ $product->photo }}" required>
       </div>
     </div>
 
