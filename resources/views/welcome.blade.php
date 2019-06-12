@@ -3,9 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12">
-                <h1 class="title">Products</h1>
-            </div>
 
             @if($products)
                 @foreach ($products as $product)
@@ -17,8 +14,12 @@
                             <a href="{{ route('products.show', ['product' => $product]) }}">
                                 <h3 class="card-title">{{ $product->title }}</h3>
                             </a>
-                            <h5>${{ $product->price }}</h5>
+                            <h5 class="font-weight-bold">${{ $product->price }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
+                            <p class="card-text seller">
+                                <span class="font-weight-bold">Seller: </span>
+                                {{ $product->user->name }}
+                            </p>
                             <a href="/cart" class="btn btn-primary">Add to cart</a>
                         </div>
                     </div>
