@@ -4,7 +4,7 @@
 
   <h1 class="title">Edit product</h1>
 
-  <form method="POST" action="/products/{{ $product->id }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('products.update', ['product' => $product]) }}" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
 

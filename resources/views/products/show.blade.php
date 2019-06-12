@@ -82,7 +82,7 @@
 @if(Auth::user()->id == $product->user_id)
   <div class="field">
     <div class="control">
-      <a href="/products/{{ $product->id }}/edit" class="button is-link">
+      <a href="{{ route('products.edit', ['product' => $product]) }}" class="button is-link">
         Settings
       </a>
     </div>

@@ -7,14 +7,14 @@
   <ul>
     @foreach ($products as $product)
       <li>
-        <a href="/products/{{ $product->id }}">
+        <a href="{{ route('products.show', ['product' => $product]) }}">
           {{ $product->title}}
         </a>
       </li>
     @endforeach
   </ul>
   
-  <a href="/products/create" class="button is-link">
+  <a href="{{ route('products.create') }}" class="button is-link">
     Add product
   </a>
 @endsection

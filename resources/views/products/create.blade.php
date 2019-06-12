@@ -4,7 +4,7 @@
 
   <h1 class="title">Add a new product</h1>
 
-  <form method="POST" action="/products" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
     @csrf
 
     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
