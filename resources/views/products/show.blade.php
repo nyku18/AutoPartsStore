@@ -1,101 +1,102 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">Product details</div>
 
-<h1 class="title">Product details</h1>
+          <div class="card-body">
 
-<div class="field">
-  <label class="label" for="user_id">Seller</label>
+            @if($product->photo)
+              <div class="form-group">
+                <img src="{{ url('uploads/products') . '/' . $product->photo }}" alt="Product photo">
+              </div>
+            @endif
 
-  <div class="control">
-    <p class="input">{{ $product->user_id }}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="title">Title</label>
 
-<div class="field">
-  <label class="label" for="brand">Brand</label>
+              <div class="control">
+                <p class="input form-control">{{ $product->title}}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->model->brand->name }}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="description">Description</label>
 
-<div class="field">
-  <label class="label" for="model">Model</label>
+              <div class="control">
+                <p class="textarea form-control">{{ $product->description}}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->model->name }}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="brand">Brand</label>
 
-<div class="field">
-  <label class="label" for="category">Category</label>
+              <div class="control">
+                <p class="input form-control">{{ $product->model->brand->name }}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->category->title }}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="model">Model</label>
 
-<div class="field">
-  <label class="label" for="title">Title</label>
+              <div class="control">
+                <p class="input form-control">{{ $product->model->name }}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->title}}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="category">Category</label>
 
-<div class="field">
-  <label class="label" for="description">Description</label>
+              <div class="control">
+                <p class="input form-control">{{ $product->category->title }}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="textarea">{{ $product->description}}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="title">Stock</label>
 
-<div class="field">
-  <label class="label" for="title">Stock</label>
+              <div class="control">
+                <p class="input form-control">{{ $product->stock }}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->stock }}</p>
-  </div>
-</div>
+            <div class="form-group">
+              <label class="label" for="title">Price</label>
 
-<div class="field">
-  <label class="label" for="title">Price</label>
+              <div class="control">
+                <p class="input form-control">${{ $product->price }}</p>
+              </div>
+            </div>
 
-  <div class="control">
-    <p class="input">{{ $product->price }}</p>
-  </div>
-</div>
+            <div class="form-group">
+                  <p class="checkbox">{{ $product->original ? 'Original' : 'Unoriginal' }}</p>
+            </div>
 
-<div class="field">
-      <p class="checkbox">{{ $product->original ? 'Original' : 'Unoriginal' }}</p>
-</div>
+            @if(Auth::user()->id == $product->user_id)
+              <div class="form-group">
+                <div class="control">
+                  <a href="{{ route('products.edit', ['product' => $product]) }}" class="btn btn-primary button is-link">
+                    Settings
+                  </a>
+                </div>
+              </div>
 
-<div class="field">
-  <label class="label" for="photo">Photo</label>
-  <div class="control">
-    <p class="input">{{ $product->photo }}</p>
-  </div>
-</div>
+            @else
+              <div class="form-group">
+                <div class="control">
+                  <a href="/cart" class="btn btn-primary button is-link">
+                    Add to cart
+                  </a>
+                </div>
+              </div>
+            @endif
 
-@if(Auth::user()->id == $product->user_id)
-  <div class="field">
-    <div class="control">
-      <a href="{{ route('products.edit', ['product' => $product]) }}" class="button is-link">
-        Settings
-      </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-@else
-  <div class="field">
-    <div class="control">
-      <a href="/cart" class="button is-link">
-        Add to cart
-      </a>
-    </div>
-  </div>
-@endif
-
 @endsection

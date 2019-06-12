@@ -1,20 +1,29 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">All products</div>
 
-  <h1 class="title">Products</h1>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              @foreach ($products as $product)
+                <li class="list-group-item">
+                  <a href="{{ route('products.show', ['product' => $product]) }}">
+                    {{ $product->title}}
+                  </a>
+                </li>
+              @endforeach
+            </ul>
 
-  <ul>
-    @foreach ($products as $product)
-      <li>
-        <a href="{{ route('products.show', ['product' => $product]) }}">
-          {{ $product->title}}
-        </a>
-      </li>
-    @endforeach
-  </ul>
-  
-  <a href="{{ route('products.create') }}" class="button is-link">
-    Add product
-  </a>
+            <a href="{{ route('products.create') }}" class="btn btn-primary button is-link">
+              Add product
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
