@@ -26,7 +26,7 @@
                 @foreach ($products as $product)
                     <div class="col-12 col-md-6 col-lg-4 card px-2 py-4">
                         @if($product->photo)
-                            <img class="card-img-top" src="{{ url('uploads/products') . '/' . $product->photo }}" alt="Product photo">
+                            <img class="card-img-top" src="{{ url('uploads/products') . '/' . $product->photo }}?v={{ time() }}" alt="Product photo">
                         @endif
                         <div class="card-body">
                             <a href="{{ route('products.show', ['product' => $product]) }}">

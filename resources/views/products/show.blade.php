@@ -11,7 +11,7 @@
 
             @if($product->photo)
               <div class="form-group">
-                <img src="{{ url('uploads/products') . '/' . $product->photo }}" alt="Product photo">
+                <img src="{{ url('uploads/products') . '/' . $product->photo }}?v={{ time() }}" alt="Product photo">
               </div>
             @endif
 
