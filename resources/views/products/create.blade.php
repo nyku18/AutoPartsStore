@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">Add product</div>
+          <div class="card-header bg-secondary text-white">Add product</div>
 
           <div class="card-body">
             <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
@@ -15,7 +15,7 @@
               <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
               <div class="form-group">
-                <label class="label" for="photo">Photo</label>
+                <label class="label font-weight-bold" for="photo">Photo</label>
 
                 <div class="control">
                   <input type="file" class="input" name="product_photo" required>
@@ -23,7 +23,7 @@
               </div>
 
               <div class="form-group">
-                <label class="label" for="title">Title</label>
+                <label class="label font-weight-bold" for="title">Title</label>
 
                 <div class="control">
                   <input type="text" class="input form-control" name="title" placeholder="Title" value="{{ old('title')}}" required>
@@ -31,7 +31,7 @@
               </div>
 
               <div class="form-group">
-                <label class="label" for="description">Description</label>
+                <label class="label font-weight-bold" for="description">Description</label>
 
                 <div class="control">
                   <textarea name="description" class="textarea form-control" placeholder="Description" required>{{ old('description') }}</textarea>
@@ -40,7 +40,7 @@
 
               @if($brands)
                 <div class="form-group">
-                  <label class="label" for="brand">Brand</label>
+                  <label class="label font-weight-bold" for="brand">Brand</label>
                   <select class="input form-control" name="brand_id" required>
                     <option></option>
                     @foreach($brands as $brand)
@@ -52,7 +52,7 @@
 
               @if($models)
                 <div class="form-group">
-                  <label class="label" for="model">Model</label>
+                  <label class="label font-weight-bold" for="model">Model</label>
                   <select class="input form-control" name="model_id" required>
                     <option></option>
                     @foreach($models as $model)
@@ -64,7 +64,7 @@
 
               @if($categories)
                 <div class="form-group">
-                  <label class="label" for="category">Category</label>
+                  <label class="label font-weight-bold" for="category">Category</label>
                   <select class="input form-control" name="category_id" required>
                     <option></option>
                     @foreach($categories as $category)
@@ -75,7 +75,7 @@
               @endif
 
               <div class="form-group">
-                <label class="label" for="title">Stock</label>
+                <label class="label font-weight-bold" for="title">Stock</label>
 
                 <div class="control">
                   <input type="number" class="input form-control" name="stock" placeholder="Stock" min="0" required>
@@ -83,7 +83,7 @@
               </div>
 
               <div class="form-group">
-                <label class="label" for="title">Price ($)</label>
+                <label class="label font-weight-bold" for="title">Price ($)</label>
 
                 <div class="control">
                   <input type="decimal" class="input form-control" name="price" placeholder="Price" min="0" required>

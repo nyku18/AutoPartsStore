@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">All products</div>
+          <div class="card-header bg-secondary text-white">All products</div>
 
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -18,7 +18,7 @@
               @endforeach
             </ul>
 
-            <a href="{{ route('products.create') }}" class="btn btn-primary button is-link">
+            <a href="{{ route('products.create') }}" class="btn btn-primary button is-link mt-4">
               Add product
             </a>
           </div>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">Product details</div>
+          <div class="card-header bg-secondary text-white">Product details</div>
 
           <div class="card-body">
 
@@ -16,7 +16,7 @@
             @endif
 
             <div class="form-group">
-              <label class="label" for="title">Title</label>
+              <label class="label font-weight-bold" for="title">Title</label>
 
               <div class="control">
                 <p class="input form-control">{{ $product->title}}</p>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="description">Description</label>
+              <label class="label font-weight-bold" for="description">Description</label>
 
               <div class="control">
                 <p class="textarea form-control">{{ $product->description}}</p>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="brand">Brand</label>
+              <label class="label font-weight-bold" for="brand">Brand</label>
 
               <div class="control">
                 <p class="input form-control">{{ $product->model->brand->name }}</p>
@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="model">Model</label>
+              <label class="label font-weight-bold" for="model">Model</label>
 
               <div class="control">
                 <p class="input form-control">{{ $product->model->name }}</p>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="category">Category</label>
+              <label class="label font-weight-bold" for="category">Category</label>
 
               <div class="control">
                 <p class="input form-control">{{ $product->category->title }}</p>
@@ -56,7 +56,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="title">Stock</label>
+              <label class="label font-weight-bold" for="title">Stock</label>
 
               <div class="control">
                 <p class="input form-control">{{ $product->stock }}</p>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label" for="title">Price</label>
+              <label class="label font-weight-bold" for="title">Price</label>
 
               <div class="control">
                 <p class="input form-control">${{ $product->price }}</p>
