@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product as Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,8 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $products = Product::all();
+        //$products = Product::all();
+        $products = Product::where('user_id', '<>', Auth::user()->id)->get();
         return view('welcome', compact('products'));
     }
 
