@@ -16,5 +16,6 @@ Route::resource('products', 'ProductsController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@welcome')->name('welcome');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/search', 'HomeController@search')->name('search');

@@ -35,4 +35,23 @@ class HomeController extends Controller
         $products = Product::all();
         return view('welcome', compact('products'));
     }
+
+    public function search(Request $request) {
+        if($request->search_word) {
+            $products = Product::where('title', 'LIKE', '%' . $request->search_word . '%')
+                ->orWhere('description', 'LIKE', '%' . $request->search_word . '%')->get();
+
+            if($products->isEmpty()) {
+                // no products found with search criteria
+                return redirect()->route('welcome')->with('search_message', 'No products found.');
+            }
+            else {
+                // products found with search criteria
+                return view('welcome', compact('products'));
+            }
+        }
+
+        // empty search word
+        return redirect()->route('welcome');
+    }
 }

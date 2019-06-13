@@ -3,7 +3,25 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            <div class="col-auto">
+                <form action="{{ route('search') }}" method="POST" role="search" class="form-inline">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="search_word" placeholder="Search products">
+                        <button type="submit" class="btn btn-success">
+                            Search
+                        </button>
+                    </div>
+                </form>
 
+                @if (session('search_message'))
+                    <div class="alert alert-success mt-3">
+                        {{ session('search_message') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="row justify-content-center">
             @if($products)
                 @foreach ($products as $product)
                     <div class="col-12 col-md-6 col-lg-4 card px-2 py-4">
