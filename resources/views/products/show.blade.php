@@ -67,7 +67,7 @@
               <label class="label font-weight-bold" for="title">Price</label>
 
               <div class="control">
-                <p class="input form-control">${{ $product->price }}</p>
+                <p class="input form-control">€{{ $product->price }}</p>
               </div>
             </div>
 

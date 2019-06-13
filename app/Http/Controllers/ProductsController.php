@@ -61,9 +61,7 @@ class ProductsController extends Controller
 
             $image = Image::make( $request->file('product_photo'));
 
-            $image->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save( $path .'/'.$image_name );
+            $image->resize(350, 220)->save( $path .'/'.$image_name );
 
             $product['photo'] = $image_name;
             $product->save();
@@ -102,10 +100,8 @@ class ProductsController extends Controller
 
            $image = Image::make( $request->file('product_photo'));
 
-           $image->resize(300, null, function ($constraint) {
-               $constraint->aspectRatio();
-           })->save( $path .'/'.$image_name );
-           
+           $image->resize(350, 220)->save( $path .'/'.$image_name );
+
            $request['original'] = $request->original ? 1 : 0;
            $request['photo'] = $image_name;
            $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));

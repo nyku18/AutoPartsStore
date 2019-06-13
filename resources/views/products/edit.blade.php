@@ -87,7 +87,7 @@
             </div>
 
             <div class="form-group">
-              <label class="label font-weight-bold" for="title">Price ($)</label>
+              <label class="label font-weight-bold" for="title">Price (€)</label>
 
               <div class="control">
                 <input type="decimal" class="input form-control" name="price" placeholder="Price" value="{{ $product->price }}" min="0" required>

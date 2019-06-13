@@ -34,8 +34,7 @@
                                 <a href="{{ route('products.show', ['product' => $product]) }}">
                                     <h3 class="card-title">{{ $product->title }}</h3>
                                 </a>
-                                <h5 class="font-weight-bold">${{ $product->price }}</h5>
-                                <p class="card-text">{{ $product->description }}</p>
+                                <h5 class="font-weight-bold">€{{ $product->price }}</h5>
                                 <p class="card-text seller">
                                     <span class="font-weight-bold">Seller: </span>
                                     {{ $product->user->name }}
