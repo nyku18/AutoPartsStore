@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany('App\Cart')->withPivot('amount');
+    }
 }
