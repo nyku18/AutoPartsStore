@@ -33,8 +33,14 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        //$products = Product::all();
-        $products = Product::where('user_id', '<>', Auth::user()->id)->get();
+        if(Auth::user())
+        {
+          $products = Product::where('user_id', '<>', Auth::user()->id)->get();
+        }
+        else
+        {
+          $products = Product::all();
+        }
         return view('welcome', compact('products'));
     }
 
