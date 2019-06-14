@@ -5,7 +5,7 @@
         <div class="row justify-content-center mb-3">
             <div class="col-auto">
                 <form action="{{ route('search') }}" method="POST" role="search" class="form-inline">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="form-group">
                         <input type="text" class="form-control" name="search_word" placeholder="Search products">
                         <button type="submit" class="btn btn-success ml-2">
