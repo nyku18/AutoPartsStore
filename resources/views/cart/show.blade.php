@@ -4,7 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
             @if(!$products->isEmpty())
+                @php
+                  $total=0;
+                @endphp
                 @foreach ($products as $product)
+                    @php
+                      $total+=$product->price * $product->pivot->amount;
+                    @endphp
                     <div class="col-12 col-md-6 col-lg-4 my-4">
                           @if($product->photo)
                               <img class="card-img-top" src="{{ url('uploads/products') . '/' . $product->photo }}?v={{ time() }}" alt="Product photo">
@@ -36,6 +42,7 @@
                             <a href="{{ route('cart.destroy', ['product' => $product]) }}" class="btn btn-primary">Remove from cart</a>
                         </div>
                 @endforeach
+                <h3 class="mt-3">Total: {{ $total }} </h3>
                 <div class="form-group">
                   <div class="control">
                     <a href="{{ route('orders.create') }}" class="btn btn-success">Place order</a>
