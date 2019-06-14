@@ -67,7 +67,7 @@ class ProductsController extends Controller
             $product->save();
           }
 
-      return redirect('/products');
+      return redirect()->route('products.index');
     }
 
     public function show(Product $product)
@@ -107,13 +107,13 @@ class ProductsController extends Controller
            $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));
 
       }
-      return redirect('/products');
+      return redirect()->route('products.index');
     }
 
     public function destroy(Product $product)
     {
       $product->delete();
 
-      return redirect('/products');
+      return redirect()->route('products.index');
     }
 }

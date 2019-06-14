@@ -49,7 +49,6 @@ class CartController extends Controller
     public function show()
     {
       $session_id = session()->get( '_token' );
-
       $cart = Cart::where( 'session_id', '=', $session_id )->first();
 
       $products = [];
@@ -57,8 +56,7 @@ class CartController extends Controller
       {
         $products = $cart->products;
       }
-
-      return view('cart.show', compact('products', 'cart'));
+      return view('cart.show', compact('products'));
     }
 
     /**
@@ -90,9 +88,21 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy(Product $product)
     {
-        //
+      $session_id = session()->get( '_token' );
+      $cart = Cart::where( 'session_id', '=', $session_id )->first();
+
+      if ( $cart )
+      {
+        $products = $cart->products;
+        if ( $cart->products->contains($product) )
+        {
+          $cart->products()->detach($product->id);
+        }
+      }
+
+      return redirect()->route('cart.show');
     }
 
     public function add(Product $product)
