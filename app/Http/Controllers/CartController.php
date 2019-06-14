@@ -79,7 +79,21 @@ class CartController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+      $session_id = session()->get( '_token' );
+      $cart = Cart::where( 'session_id', '=', $session_id )->first();
 
+      if ( $cart )
+      {
+        if ( $cart->products->contains($product) )
+        {
+          if($request->amount <= $product->stock && $request->amount > 0)
+          {
+            $cart->products()->updateExistingPivot($product->id, ['amount' => $request->amount]);
+          }
+        }
+      }
+
+      return redirect()->route('cart.show');
     }
 
     /**

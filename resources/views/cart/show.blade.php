@@ -13,7 +13,26 @@
                                 <h3 class="card-title">{{ $product->title }}</h3>
                             </a>
                             <h5 class="font-weight-bold">€{{ $product->price }}</h5>
-                            <h5 class="font-weight-bold">Amount: {{ $product->pivot->amount }}</h5>
+                            <form method="POST" action="{{ route('cart.update', ['product' => $product]) }}">
+                              @method('PATCH')
+                              @csrf
+                              <div class="form-group">
+                                <label class="label font-weight-bold" for="brand">Amount</label>
+                                <select class="input form-control" name="amount" required>
+                                  @for ($i = 1; $i <= $product->stock; $i++)
+                                    <option value="{{ $i }}" {{ $i==$product->pivot->amount ? 'selected' : '' }} >
+                                      {{ $i }}
+                                    </option>
+                                  @endfor
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="control">
+                                  <button type="submit" class="btn btn-primary button is-link">Update</button>
+                                </div>
+                              </div>
+                            </form>
                             <a href="{{ route('cart.destroy', ['product' => $product]) }}" class="btn btn-primary">Remove from cart</a>
                         </div>
                 @endforeach

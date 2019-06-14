@@ -23,3 +23,4 @@ Route::post('/search', 'HomeController@search')->name('search');
 Route::get( 'cart/add/{product}', 'CartController@add' )->name('cart.add');
 Route::get( 'cart/show', 'CartController@show' )->name('cart.show');
 Route::get( 'cart/{product}', 'CartController@destroy' )->name('cart.destroy');
+Route::patch( 'cart/{product}', 'CartController@update' )->name('cart.update');
