@@ -52,7 +52,7 @@
                             @endif
                         @else
                             <li class="nav-item mr-2">
-                                <a class="cart" href="/cart">
+                                <a class="cart" href="{{ route('cart.show') }}">
                                     <span class="cart-icon">
                                         <img src="{{ url('images') . '/cart.png' }}" width="40" height="40">
                                     </span>

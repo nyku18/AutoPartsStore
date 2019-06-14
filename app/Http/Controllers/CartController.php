@@ -16,7 +16,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -46,9 +46,19 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show()
     {
-        //
+      $session_id = session()->get( '_token' );
+
+      $cart = Cart::where( 'session_id', '=', $session_id )->first();
+
+      $products = [];
+      if ( $cart )
+      {
+        $products = $cart->products;
+      }
+
+      return view('cart.show', compact('products', 'cart'));
     }
 
     /**
@@ -101,7 +111,7 @@ class CartController extends Controller
 
       $cart = Cart::where( 'session_id', '=', $session_id )->first();
 
-      if ( $cart->exists() )
+      if ( $cart )
       {
         // product is already in cart
         if ( $cart->products->contains($product) )
