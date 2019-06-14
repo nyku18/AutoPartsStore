@@ -19,7 +19,7 @@ class CartController extends Controller
       $session_id = session()->get( '_token' );
       $cart = Cart::where( 'session_id', '=', $session_id )->first();
 
-      $products = [];
+      $products = collect(new Product);
       if ( $cart )
       {
         $products = $cart->products;

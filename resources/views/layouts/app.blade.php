@@ -69,9 +69,9 @@
                                         My products
                                     </a>
 
-                                    {{--<a class="dropdown-item" href="{{ route('orders.index') }}">
+                                    <a class="dropdown-item" href="{{ route('orders.index') }}">
                                         My orders
-                                    </a>--}}
+                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

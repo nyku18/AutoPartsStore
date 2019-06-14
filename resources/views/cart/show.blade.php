@@ -36,6 +36,11 @@
                             <a href="{{ route('cart.destroy', ['product' => $product]) }}" class="btn btn-primary">Remove from cart</a>
                         </div>
                 @endforeach
+                <div class="form-group">
+                  <div class="control">
+                    <a href="{{ route('orders.create') }}" class="btn btn-success">Place order</a>
+                  </div>
+                </div>
               @else
                 <h3>You have no products in cart!</h3>
             @endif
