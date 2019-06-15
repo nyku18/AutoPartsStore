@@ -93,53 +93,80 @@
                 </div>
               </div>
             @endif
+          </div>
+        </div>
 
+        @if(Auth::user()->id != $product->user_id)
+          <div class="card reviews my-4">
+            <div class="card-header bg-secondary text-white">Reviews</div>
             <div class="card-body">
-              <form method="POST" action="{{ route('reviews.store') }}">
+              @if(!$product->reviews->isEmpty())
+                <div class="rating">
+                  @php
+                    $average=0;
+                  @endphp
+
+                  @foreach ($product->reviews as $review)
+                    @php
+                      $average+=$review->review;
+                    @endphp
+                  @endforeach
+
+                  @php
+                    $average/=$product->reviews->count();
+                  @endphp
+
+                  <h3>Rating - <span class="small">average is {{ number_format($average, 2, '.', ',') }}</span></h3>
+
+                  <div class="rating-stars">
+                    @for($i=1; $i <= 5; $i++)
+                      <span class="display-4 fa fa-star {{ ($i <= $average) ? 'text-warning' : 'text-dark' }}"></span>
+                    @endfor
+                  </div>
+                </div>
+              @else
+                <h3>There are no reviews yet!</h3>
+              @endif
+
+              <form method="POST" action="{{ route('reviews.store') }}" class="mt-3">
                 @csrf
 
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                @if(!$product->reviews->isEmpty())
-                  <div class="form-group">
-                    <label class="label font-weight-bold" for="description">Reviews</label>
-
-                      @php
-                        $average=0;
-                      @endphp
-                      @foreach ($product->reviews as $review)
-                          @php
-                            $average+=$review->review;
-                          @endphp
-                      @endforeach
-
-                      @php
-                        $average/=$product->reviews->count();
-                      @endphp
-                      <h3 class="mt-3">Total: {{ $average }} </h3>
-
-                      <div class="control">
-                        <select class="input form-control" name="review" required>
-                          @for ($i = 1; $i <= 5; $i++)
-                            <option>{{ $i }}</option>
-                          @endfor
-                        </select>
-                      </div>
+                <div class="form-group">
+                  <div class="control">
+                    <select class="input form-control" name="review" required>
+                      @for ($i = 1; $i <= 5; $i++)
+                        <option>{{ $i }}</option>
+                      @endfor
+                    </select>
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <div class="control">
-                      <button type="submit" class="btn btn-primary button is-link">Add review</button>
-                    </div>
+                <div class="form-group">
+                  <div class="control">
+                    <button type="submit" class="btn btn-success button is-link">Add review</button>
                   </div>
-                @else
-                  <h3>There are no reviews yet!</h3>
-                @endif
-
-                @include ('errors')
+                </div>
               </form>
+              @include ('errors')
+
+                {{--
+                @if($product->reviews)
+                  @foreach($product->reviews as $review)
+                    <div class="comments-content my-3">
+                      <span class="font-weight-bold">{{ $review->user->name }}:</span>
+                      <span>{{ $review->review }}</span>
+                    </div>
+                  @endforeach
+                @endif
+                --}}
+
+              </div>
             </div>
 
+          <div class="card comments my-4">
+            <div class="card-header bg-secondary text-white">Comments</div>
             <div class="card-body">
               <form method="POST" action="{{ route('comments.store') }}">
                 @csrf
@@ -147,8 +174,6 @@
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                 <div class="form-group">
-                  <label class="label font-weight-bold" for="description">Comments</label>
-
                   <div class="control">
                     <textarea name="comment" class="textarea form-control" placeholder="Comment" required></textarea>
                   </div>
@@ -156,7 +181,7 @@
 
                 <div class="form-group">
                   <div class="control">
-                    <button type="submit" class="btn btn-primary button is-link">Add comment</button>
+                    <button type="submit" class="btn btn-success button is-link">Add comment</button>
                   </div>
                 </div>
 
@@ -165,14 +190,15 @@
 
               @if($product->comments)
                 @foreach($product->comments as $comment)
-                  <div class="control">
-                    <p>{{ $comment->user->name }}</p>
-                    <p class="input form-control">{{ $comment->comment }}</p>
+                  <div class="comments-content d-flex flex-column my-3">
+                    <div class="font-weight-bold">{{ $comment->user->name }}:</div>
+                    <div>{{ $comment->comment }}</div>
                   </div>
                 @endforeach
               @endif
+            </div>
           </div>
-        </div>
+        @endif
       </div>
     </div>
   </div>
