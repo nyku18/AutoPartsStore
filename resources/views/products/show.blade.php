@@ -87,13 +87,44 @@
             @else
               <div class="form-group">
                 <div class="control">
-                  <a href="/cart" class="btn btn-primary button is-link">
+                  <a href="{{ route('cart.add', ['product' => $product]) }}" class="btn btn-primary button is-link">
                     Add to cart
                   </a>
                 </div>
               </div>
             @endif
 
+            <div class="card-body">
+              <form method="POST" action="{{ route('comments.store') }}">
+                @csrf
+
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                <div class="form-group">
+                  <label class="label font-weight-bold" for="description">Comments</label>
+
+                  <div class="control">
+                    <textarea name="comment" class="textarea form-control" placeholder="Comment" required></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="control">
+                    <button type="submit" class="btn btn-primary button is-link">Add comment</button>
+                  </div>
+                </div>
+
+                @include ('errors')
+              </form>
+
+              @if($product->comments)
+                @foreach($product->comments as $comment)
+                  <div class="control">
+                    <p>{{ $comment->user->name }}</p>
+                    <p class="input form-control">{{ $comment->comment }}</p>
+                  </div>
+                @endforeach
+              @endif
           </div>
         </div>
       </div>

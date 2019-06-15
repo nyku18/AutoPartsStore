@@ -26,3 +26,4 @@ Route::get( 'cart/{product}', 'CartController@destroy' )->name('cart.destroy');
 Route::patch( 'cart/{product}', 'CartController@update' )->name('cart.update');
 
 Route::resource('orders', 'OrdersController');
+Route::resource('comments', 'CommentsController');

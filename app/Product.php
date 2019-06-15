@@ -34,4 +34,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Order')->withPivot('amount', 'product_price');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
