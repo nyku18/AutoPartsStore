@@ -12,8 +12,14 @@
                   @foreach ($orders as $order)
                     <li class="list-group-item">
                       <a href="{{ route('orders.show', ['order' => $order]) }}">
-                        {{ $order->created_at }} - {{ $order->id }} - {{ $order->status }}
+                        <h3>Order no. {{ $order->id }}</h3>
                       </a>
+
+                      <div class="order-details">
+                        <div>Ordered on {{ $order->created_at }}</div>
+                        <div>Status: {{ $order->status }}</div>
+                      </div>
+
                     </li>
                   @endforeach
                 </ul>
