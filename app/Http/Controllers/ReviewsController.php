@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CommentsController extends Controller
+class ReviewsController extends Controller
 {
     public function __construct()
     {
@@ -40,10 +40,10 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-      $comment = Comment::create([
+      $review = Review::create([
         'product_id' => $request->product_id,
         'user_id' => Auth::user()->id,
-        'comment' => $request->comment
+        'review' => $request->review
       ]);
 
       return back();
@@ -52,10 +52,10 @@ class CommentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Review $review)
     {
         //
     }
@@ -63,10 +63,10 @@ class CommentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Review $review)
     {
         //
     }
@@ -75,10 +75,10 @@ class CommentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Review $review)
     {
         //
     }
@@ -86,10 +86,10 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Review $review)
     {
         //
     }

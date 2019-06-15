@@ -95,6 +95,52 @@
             @endif
 
             <div class="card-body">
+              <form method="POST" action="{{ route('reviews.store') }}">
+                @csrf
+
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                @if(!$product->reviews->isEmpty())
+                  <div class="form-group">
+                    <label class="label font-weight-bold" for="description">Reviews</label>
+
+                      @php
+                        $average=0;
+                      @endphp
+                      @foreach ($product->reviews as $review)
+                          @php
+                            $average+=$review->review;
+                          @endphp
+                      @endforeach
+
+                      @php
+                        $average/=$product->reviews->count();
+                      @endphp
+                      <h3 class="mt-3">Total: {{ $average }} </h3>
+
+                      <div class="control">
+                        <select class="input form-control" name="review" required>
+                          @for ($i = 1; $i <= 5; $i++)
+                            <option>{{ $i }}</option>
+                          @endfor
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="control">
+                      <button type="submit" class="btn btn-primary button is-link">Add review</button>
+                    </div>
+                  </div>
+                @else
+                  <h3>There are no reviews yet!</h3>
+                @endif
+
+                @include ('errors')
+              </form>
+            </div>
+
+            <div class="card-body">
               <form method="POST" action="{{ route('comments.store') }}">
                 @csrf
 
