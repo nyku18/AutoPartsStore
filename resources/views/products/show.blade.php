@@ -19,7 +19,7 @@
               <label class="label font-weight-bold" for="title">Title</label>
 
               <div class="control">
-                <p class="input form-control">{{ $product->title}}</p>
+                <p>{{ $product->title}}</p>
               </div>
             </div>
 
@@ -35,7 +35,7 @@
               <label class="label font-weight-bold" for="brand">Brand</label>
 
               <div class="control">
-                <p class="input form-control">{{ $product->model->brand->name }}</p>
+                <p>{{ $product->model->brand->name }}</p>
               </div>
             </div>
 
@@ -43,7 +43,7 @@
               <label class="label font-weight-bold" for="model">Model</label>
 
               <div class="control">
-                <p class="input form-control">{{ $product->model->name }}</p>
+                <p>{{ $product->model->name }}</p>
               </div>
             </div>
 
@@ -51,7 +51,7 @@
               <label class="label font-weight-bold" for="category">Category</label>
 
               <div class="control">
-                <p class="input form-control">{{ $product->category->title }}</p>
+                <p>{{ $product->category->title }}</p>
               </div>
             </div>
 
@@ -59,7 +59,7 @@
               <label class="label font-weight-bold" for="title">Stock</label>
 
               <div class="control">
-                <p class="input form-control">{{ $product->stock }}</p>
+                <p>{{ $product->stock }}</p>
               </div>
             </div>
 
@@ -67,12 +67,12 @@
               <label class="label font-weight-bold" for="title">Price</label>
 
               <div class="control">
-                <p class="input form-control">€{{ $product->price }}</p>
+                <p>€{{ $product->price }}</p>
               </div>
             </div>
 
             <div class="form-group">
-                  <p class="checkbox">{{ $product->original ? 'Original' : 'Unoriginal' }}</p>
+                  <p>{{ $product->original ? 'Original' : 'Unoriginal' }}</p>
             </div>
 
             @if(Auth::user()->id == $product->user_id)
