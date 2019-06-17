@@ -102,11 +102,12 @@ class ProductsController extends Controller
 
            $image->resize(350, 220)->save( $path .'/'.$image_name );
 
-           $request['original'] = $request->original ? 1 : 0;
            $request['photo'] = $image_name;
-           $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));
-
       }
+
+      $request['original'] = $request->original ? 1 : 0;
+      $product->update(request(['model_id', 'title', 'description', 'stock', 'price', 'original', 'photo']));
+
       return redirect()->route('products.index');
     }
 

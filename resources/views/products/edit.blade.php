@@ -14,6 +14,7 @@
             @csrf
 
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="photo" value="{{ $product->photo }}">
 
             @if($product->photo)
               <div class="form-group">
@@ -105,9 +106,8 @@
               </div>
             </div>
 
-            @include ('errors')
           </form>
-
+          @include ('errors')
           <form method="POST" action="{{ route('products.destroy', ['product' => $product]) }}">
             @method('DELETE')
             @csrf

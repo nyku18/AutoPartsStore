@@ -40,11 +40,21 @@ class ReviewsController extends Controller
      */
     public function store(Request $request)
     {
-      $review = Review::create([
-        'product_id' => $request->product_id,
-        'user_id' => Auth::user()->id,
-        'review' => $request->review
-      ]);
+      $review = Review::where('user_id', '=', Auth::user()->id)->where('product_id', '=', $request->product_id)->first();
+
+      if($review)
+      {
+          $review->review = $request->review;
+          $review->save();
+      }
+
+      else {
+          $review = Review::create([
+            'product_id' => $request->product_id,
+            'user_id' => Auth::user()->id,
+            'review' => $request->review
+          ]);
+      }
 
       return back();
     }

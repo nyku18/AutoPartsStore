@@ -27,7 +27,7 @@
               <label class="label font-weight-bold" for="description">Description</label>
 
               <div class="control">
-                <p class="textarea form-control">{{ $product->description}}</p>
+                <p>{{ $product->description}}</p>
               </div>
             </div>
 
