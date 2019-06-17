@@ -41,6 +41,9 @@ class OrdersController extends Controller
               'product_price' => $product->price
             ) );
 
+            $stock = $product->stock - $product->pivot->amount;
+            $product->stock = $stock;
+            $product->save();
             $cart->products()->detach($product->id);
           }
 

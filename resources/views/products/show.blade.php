@@ -85,13 +85,15 @@
               </div>
 
             @else
-              <div class="form-group">
-                <div class="control">
-                  <a href="{{ route('cart.add', ['product' => $product]) }}" class="btn btn-primary button is-link">
-                    Add to cart
-                  </a>
+              @if($product->stock > 0)
+                <div class="form-group">
+                  <div class="control">
+                    <a href="{{ route('cart.add', ['product' => $product]) }}" class="btn btn-primary button is-link">
+                      Add to cart
+                    </a>
+                  </div>
                 </div>
-              </div>
+              @endif
             @endif
           </div>
         </div>

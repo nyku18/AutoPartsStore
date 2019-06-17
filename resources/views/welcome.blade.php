@@ -39,7 +39,9 @@
                                     <span class="font-weight-bold">Seller: </span>
                                     {{ $product->user->name }}
                                 </p>
-                                <a href="{{ route('cart.add', ['product' => $product]) }}" class="btn btn-primary">Add to cart</a>
+                                @if($product->stock > 0)
+                                  <a href="{{ route('cart.add', ['product' => $product]) }}" class="btn btn-primary">Add to cart</a>
+                                @endif
                             </div>
                         </div>
                     </div>
